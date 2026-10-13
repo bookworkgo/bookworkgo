@@ -1,1 +1,875 @@
-Hello Test
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BookWorkGo — Vacant rental cleaning, arranged</title>
+<meta name="description" content="Arrange vacant rental cleaning in Centennial, Greenwood Village, Lone Tree, and Parker. You send the details. We coordinate the pro, the schedule, and the follow-through. Early pilot.">
+<meta name="theme-color" content="#203e32">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' rx='3' fill='%23203e32'/%3E%3Cpath d='M9 17h14M17 10l7 7-7 7' fill='none' stroke='%23d6ed70' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600&display=swap">
+<style>
+:root {
+  --paper: #f4f0e4;
+  --paper-deep: #ece6d4;
+  --sheet: #fffdf6;
+  --forest: #203e32;
+  --forest-deep: #14291f;
+  --ink: #17231d;
+  --muted: #46534a;
+  --soft-on-dark: #dfe5d8;
+  --lime: #d6ed70;
+  --lime-wash: #eef5cf;
+  --clay: #e88744;
+  --clay-ink: #a0471a;
+  --rule: rgba(32, 62, 50, .35);
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif-condensed, sans-serif;
+  --mono: "DM Mono", ui-monospace, Menlo, Consolas, monospace;
+  --gutter: clamp(16px, 4vw, 40px);
+  --header-h: 120px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); overflow-x: clip; }
+body {
+  margin: 0;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.45;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: radial-gradient(rgba(32, 62, 50, .07) .6px, transparent .9px);
+  background-size: 4px 4px;
+  overflow-x: clip;
+}
+img, svg { max-width: 100%; }
+a { color: var(--forest); }
+a:hover { color: var(--forest-deep); }
+:focus-visible { outline: 3px solid var(--forest); outline-offset: 3px; border-radius: 2px; }
+.dark :focus-visible { outline-color: var(--lime); }
+.dark .panel :focus-visible { outline-color: var(--forest); }
+[hidden] { display: none !important; }
+
+.skip {
+  position: absolute; left: 12px; top: -80px; z-index: 50;
+  background: var(--lime); color: var(--forest); padding: 12px 18px;
+  font-weight: 700; text-decoration: none; border: 2px solid var(--forest);
+}
+.skip:focus { top: 12px; }
+
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+.section { padding-top: clamp(72px, 9vw, 128px); padding-bottom: clamp(72px, 9vw, 128px); }
+.split { display: flex; flex-wrap: wrap; gap: clamp(40px, 6vw, 96px); }
+.split > * { min-width: 0; }
+
+.kicker {
+  margin: 0 0 18px;
+  font-family: var(--mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted);
+}
+.h2 {
+  margin: 0;
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(38px, 5vw, 66px); line-height: 1.02; letter-spacing: -.025em;
+  color: var(--forest);
+}
+.h2 em, .hero h1 em, .cta h2 em { font-style: italic; font-weight: 400; }
+.mono { font-family: var(--mono); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 12px 24px;
+  font-family: var(--body); font-weight: 700; font-size: 19px; letter-spacing: .07em; text-transform: uppercase;
+  text-decoration: none; border: 2px solid var(--forest); border-radius: 2px; cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease;
+}
+.btn svg { flex: none; }
+.btn-sm { min-height: 44px; padding: 8px 16px; font-size: 16px; }
+.btn-primary { background: var(--forest); color: var(--paper); }
+.btn-primary:hover { background: var(--forest-deep); color: var(--paper); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--clay); }
+.btn-ghost { background: transparent; color: var(--forest); }
+.btn-ghost:hover { background: var(--forest); color: var(--paper); }
+.btn-text { background: transparent; color: var(--forest); border-color: transparent; text-decoration: underline; text-underline-offset: 4px; }
+.btn-text:hover { border-color: var(--forest); }
+.btn[disabled] { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ---------- Header ---------- */
+.site-header { position: sticky; top: 0; z-index: 20; background: var(--paper); border-bottom: 1.5px solid var(--forest); }
+.preview-bar {
+  background: var(--forest); color: var(--paper);
+  font-family: var(--mono); font-size: 13px; letter-spacing: .04em; line-height: 1.45;
+  padding: 8px 16px; text-align: center;
+}
+.preview-bar strong { color: var(--lime); font-weight: 500; }
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 12px 28px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--forest); }
+.brand span { font-family: var(--display); font-weight: 800; font-size: 25px; letter-spacing: -.02em; }
+.nav-links { display: flex; gap: 26px; align-items: center; }
+.nav-links a {
+  font-weight: 600; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
+  padding: 10px 2px; border-bottom: 2px solid transparent; transition: border-color .15s;
+}
+.nav-links a:hover { border-bottom-color: var(--clay); }
+.nav-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ---------- Hero ---------- */
+.hero {
+  border-bottom: 1.5px solid var(--forest);
+  background-image: repeating-linear-gradient(90deg, rgba(32, 62, 50, .07) 0 1px, transparent 1px 80px);
+  background-position: center top;
+}
+.hero .split { align-items: center; padding-top: clamp(48px, 8vw, 104px); padding-bottom: clamp(56px, 8vw, 112px); gap: clamp(48px, 6vw, 88px); }
+.hero-copy { flex: 1 1 520px; }
+.hero .kicker { color: var(--forest); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 26px; }
+.hero .kicker::before { content: ""; width: 28px; height: 1.5px; background: var(--forest); }
+.hero h1 {
+  margin: 0; font-family: var(--display); font-weight: 800;
+  font-size: clamp(50px, 8vw, 112px); line-height: .95; letter-spacing: -.035em; color: var(--forest);
+}
+.hero h1 em { letter-spacing: -.02em; }
+.mark { box-shadow: inset 0 -.28em 0 var(--lime); }
+.hero-lead { margin: 30px 0 0; max-width: 34ch; font-size: clamp(21px, 2vw, 25px); line-height: 1.4; color: #24312a; }
+.hero-actions { margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap; }
+.promise {
+  margin: 40px 0 0; padding-top: 18px; border-top: 1px solid rgba(32, 62, 50, .4); max-width: 520px;
+  font-family: var(--display); font-style: italic; font-size: 21px; color: var(--forest);
+}
+.hero-art { flex: 1 1 360px; display: flex; justify-content: center; padding: 12px 8px 28px; }
+
+/* Example work order */
+.ticket {
+  position: relative; margin: 0; width: 100%; max-width: 440px;
+  background: var(--sheet); border: 1.5px solid var(--forest); box-shadow: 12px 12px 0 var(--forest);
+  transform: rotate(-2deg); transition: transform .35s ease;
+  animation: settle 1.05s .3s cubic-bezier(.2, .7, .2, 1) both;
+}
+.ticket:hover { transform: rotate(-.5deg) translateY(-4px); }
+.ticket-bar {
+  display: flex; justify-content: space-between; gap: 12px; padding: 10px 18px;
+  background: var(--lime); border-bottom: 1.5px solid var(--forest);
+  font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--forest);
+}
+.ticket-bar span:first-child { font-weight: 500; }
+.ticket-body { padding: 22px 22px 24px; }
+.ticket-ref { margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: var(--muted); }
+.ticket-title { margin: 6px 0 18px; font-family: var(--display); font-weight: 600; font-size: 30px; line-height: 1.05; color: var(--forest); }
+.ticket dl { margin: 0; font-family: var(--mono); font-size: 13.5px; line-height: 1.4; border-bottom: 1px dashed #8d957f; }
+.ticket dl div { display: flex; gap: 12px; padding: 8px 0; border-top: 1px dashed #8d957f; }
+.ticket dt { flex: 0 0 104px; color: var(--muted); }
+.ticket dd { margin: 0; }
+.checklist { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 9px; font-size: 18px; }
+.checklist li { display: flex; gap: 10px; align-items: center; }
+.stamp {
+  position: absolute; right: -18px; bottom: 74px; width: 112px; height: 112px;
+  border: 2.5px solid var(--clay-ink); border-radius: 50%; display: grid; place-items: center; text-align: center;
+  font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .1em; line-height: 1.35;
+  color: var(--clay-ink); background: rgba(255, 253, 246, .88);
+  transform: rotate(-14deg); animation: stamp .5s 1.25s cubic-bezier(.3, .7, .3, 1) both;
+}
+.draw { stroke-dasharray: 1; stroke-dashoffset: 0; animation: draw 1.4s .6s ease-out both; }
+
+/* Staggered entrance */
+.rise { animation: rise .85s cubic-bezier(.2, .7, .2, 1) both; }
+.d1 { animation-delay: .05s; } .d2 { animation-delay: .16s; } .d3 { animation-delay: .28s; } .d4 { animation-delay: .4s; } .d5 { animation-delay: .52s; }
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes settle { from { opacity: 0; transform: rotate(-7deg) translate(30px, 40px); } to { opacity: 1; transform: rotate(-2deg); } }
+@keyframes stamp { 0% { opacity: 0; transform: rotate(-14deg) scale(1.6); } 70% { opacity: 1; transform: rotate(-14deg) scale(.94); } 100% { opacity: 1; transform: rotate(-14deg) scale(1); } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+/* ---------- Service ---------- */
+.service-intro { flex: 1 1 420px; }
+.service-scope { flex: 1 1 480px; }
+.service-intro p { max-width: 46ch; margin: 26px 0 0; }
+.figure { margin: 40px 0 0; max-width: 480px; }
+.figcap { margin-top: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.h3-label { margin: 6px 0 4px; font-weight: 700; font-size: 18px; letter-spacing: .08em; text-transform: uppercase; color: var(--forest); }
+.sub { margin: 0 0 22px; color: var(--muted); font-size: 18px; }
+.scope-list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--rule); }
+.scope-list li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 4px 14px; padding: 18px 0; border-top: 1px solid var(--rule); }
+.scope-list .idx { font-family: var(--mono); font-size: 13px; color: var(--clay-ink); padding-top: 6px; }
+.scope-list strong { font-family: var(--display); font-weight: 600; font-size: 24px; color: var(--forest); }
+.scope-list p { margin: 2px 0 0; }
+.callout { margin-top: 28px; padding: 18px 20px; border: 1.5px dashed var(--forest); display: flex; gap: 14px; align-items: flex-start; }
+.callout p { margin: 0; font-size: 18px; }
+
+/* ---------- Process ---------- */
+.process { background: var(--paper-deep); border-top: 1.5px solid var(--forest); border-bottom: 1.5px solid var(--forest); }
+.process-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px 48px; }
+.process-head > div { flex: 1 1 520px; min-width: 0; }
+.process-head p { flex: 0 1 380px; margin: 0; font-size: 18px; color: #3a463e; }
+.steps { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 40px 48px; }
+.steps li { border-top: 2px solid var(--forest); padding-top: 26px; }
+.step-num {
+  display: grid; place-items: center; width: 84px; height: 84px; border: 1.5px solid var(--forest);
+  font-family: var(--display); font-weight: 800; font-size: 54px; line-height: 1; color: var(--forest);
+}
+.step-num.n1 { background: var(--lime); }
+.step-num.n2 { background: var(--paper); }
+.step-num.n3 { background: var(--forest); color: var(--paper); }
+.steps h3 { margin: 24px 0 10px; font-family: var(--display); font-weight: 600; font-size: 28px; line-height: 1.1; color: var(--forest); }
+.steps p { margin: 0; }
+
+/* ---------- Forms ---------- */
+.form-intro { flex: 1 1 320px; max-width: 420px; }
+.form-intro > p { margin: 22px 0 0; }
+.notice { margin-top: 30px; padding: 20px 22px; background: var(--forest); color: var(--paper); }
+.notice .mono { margin: 0 0 8px; font-size: 12px; letter-spacing: .12em; color: var(--lime); }
+.notice p:last-child { margin: 0; font-size: 18px; line-height: 1.4; }
+.fine { margin: 22px 0 0; font-size: 17px; color: var(--muted); }
+
+.panel { flex: 2 1 560px; background: var(--sheet); color: var(--ink); border: 1.5px solid var(--forest); box-shadow: 10px 10px 0 rgba(32, 62, 50, .14); }
+.panel-bar {
+  display: flex; justify-content: space-between; gap: 6px 12px; flex-wrap: wrap;
+  padding: 12px clamp(20px, 3vw, 36px); border-bottom: 1.5px solid var(--forest);
+  font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--forest); background: var(--paper);
+}
+.panel-bar.lime { background: var(--lime); }
+.panel form, .review { padding: clamp(22px, 3vw, 36px); }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.group + .group { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(32, 62, 50, .3); }
+.group > legend { padding: 0; margin: 0 0 18px; font-family: var(--display); font-weight: 600; font-size: 26px; color: var(--forest); }
+.fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 24px; }
+.span { grid-column: 1 / -1; }
+.lbl, .fgrid legend {
+  display: block; padding: 0; margin: 0 0 7px;
+  font-weight: 700; font-size: 16px; letter-spacing: .07em; text-transform: uppercase; color: var(--forest);
+}
+.req { color: var(--clay-ink); font-weight: 600; letter-spacing: .04em; text-transform: none; font-size: 15px; }
+.opt { color: var(--muted); font-weight: 500; letter-spacing: .04em; text-transform: none; font-size: 15px; }
+.ctl {
+  display: block; width: 100%; min-height: 50px; padding: 10px 14px;
+  font-family: var(--body); font-weight: 500; font-size: 20px; line-height: 1.3; color: var(--ink);
+  background: var(--sheet); border: 1.5px solid #6d7a70; border-radius: 2px;
+  transition: border-color .15s, background-color .15s;
+}
+.ctl:hover, .ctl:focus { border-color: var(--forest); }
+.ctl:focus { background: #fff; }
+.ctl:user-invalid { border-color: var(--clay-ink); background: #fff3ea; }
+textarea.ctl { min-height: 132px; resize: vertical; }
+select.ctl {
+  appearance: none; padding-right: 44px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--forest) 50%), linear-gradient(135deg, var(--forest) 50%, transparent 50%);
+  background-position: calc(100% - 22px) 52%, calc(100% - 16px) 52%; background-size: 6px 6px, 6px 6px; background-repeat: no-repeat;
+}
+.hint { font-size: 16px; color: var(--muted); margin: 7px 0 0; line-height: 1.35; }
+.hint strong { color: var(--forest); }
+.choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 10px; }
+.choices.stack { grid-template-columns: 1fr; }
+.choice {
+  display: flex; gap: 12px; align-items: flex-start; min-height: 48px; padding: 12px 14px;
+  border: 1.5px solid #c4bca5; border-radius: 2px; background: var(--sheet); cursor: pointer;
+  font-size: 18px; line-height: 1.3; transition: border-color .15s, background-color .15s;
+}
+.choice:hover { border-color: var(--forest); }
+.choice input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--forest); flex: none; }
+.choice:has(input:checked) { border-color: var(--forest); background: var(--lime-wash); }
+.choice small { display: block; font-size: 15px; color: var(--muted); }
+.form-foot { margin-top: 32px; padding-top: 24px; border-top: 1.5px solid var(--forest); display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center; }
+.form-foot p { margin: 0; font-size: 17px; color: var(--muted); }
+.noscript { margin: 0 0 20px; padding: 12px 16px; border-left: 4px solid var(--clay-ink); background: #fff3ea; color: #6f2f0e; font-size: 18px; }
+
+.review h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 32px; color: var(--forest); }
+.tags { margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; }
+.tags span { padding: 5px 10px; border: 1.5px solid var(--clay-ink); color: var(--clay-ink); }
+.review > p { margin: 16px 0 0; max-width: 60ch; }
+.review dl { margin: 24px 0 0; border-top: 1.5px solid var(--forest); }
+.review dl div { display: flex; flex-wrap: wrap; gap: 2px 20px; padding: 12px 0; border-bottom: 1px dashed #8d957f; }
+.review dt { flex: 0 0 230px; font-family: var(--mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+.review dd { flex: 1 1 260px; margin: 0; min-width: 0; white-space: pre-line; overflow-wrap: anywhere; }
+.review-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+.status { margin: 16px 0 0; font-size: 17px; color: var(--forest); min-height: 1.4em; }
+
+/* ---------- Area ---------- */
+.area { border-top: 1.5px solid var(--forest); }
+.area .split { align-items: center; }
+.area-copy { flex: 1 1 420px; }
+.area-copy > p { margin: 22px 0 0; max-width: 44ch; }
+.area-list { list-style: none; margin: 32px 0 0; padding: 0; border-top: 1.5px solid var(--forest); border-bottom: 1.5px solid var(--forest); }
+.area-list li { display: flex; align-items: baseline; gap: 18px; padding: 14px 0; }
+.area-list li + li { border-top: 1px solid var(--rule); }
+.area-list .idx { font-family: var(--mono); font-size: 13px; color: var(--clay-ink); }
+.area-list .city { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3vw, 36px); color: var(--forest); }
+.area-copy .after { font-size: 18px; color: #3a463e; }
+.map { flex: 1 1 420px; margin: 0; }
+
+/* ---------- Pros ---------- */
+.pros {
+  color: var(--paper); background-color: var(--forest);
+  background-image: repeating-linear-gradient(135deg, rgba(214, 237, 112, .055) 0 1px, transparent 1px 22px);
+}
+.pros .kicker { color: var(--lime); }
+.pros h2 {
+  margin: 0; max-width: 14ch; font-family: var(--display); font-weight: 600;
+  font-size: clamp(42px, 6vw, 84px); line-height: .98; letter-spacing: -.03em; color: var(--paper);
+}
+.pros h2 em { font-style: italic; font-weight: 400; color: var(--lime); }
+.pros-lead { margin: 26px 0 0; max-width: 52ch; font-size: 21px; }
+.pillars { margin-top: 52px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 32px 48px; }
+.pillars div { border-top: 1.5px solid var(--lime); padding-top: 20px; }
+.pillars h3 { margin: 0 0 8px; font-family: var(--display); font-weight: 600; font-size: 28px; }
+.pillars p { margin: 0; color: var(--soft-on-dark); }
+.pros .split { margin-top: 64px; align-items: flex-start; gap: clamp(32px, 5vw, 72px); }
+.pros .form-intro { max-width: 400px; }
+.pros .form-intro h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.05; }
+.pros .form-intro > p { color: var(--soft-on-dark); margin-top: 18px; }
+.pros .no-guarantee { color: var(--paper); padding: 16px 18px; border: 1.5px dashed var(--lime); font-size: 18px; }
+.pros .preview-note { font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; line-height: 1.6; color: var(--lime); }
+.pros .panel { border-color: var(--paper); box-shadow: 10px 10px 0 rgba(0, 0, 0, .25); }
+
+/* ---------- FAQ ---------- */
+.faq-intro { flex: 1 1 300px; max-width: 380px; }
+.faq-intro p { margin: 20px 0 0; color: #3a463e; }
+.faq-list { flex: 2 1 560px; }
+.faq { border-top: 1px solid var(--forest); }
+.faq:last-child { border-bottom: 1px solid var(--forest); }
+.faq summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  padding: 22px 4px; font-family: var(--display); font-weight: 600; font-size: clamp(21px, 2.2vw, 26px); line-height: 1.2; color: var(--forest);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.plus { flex: none; width: 34px; height: 34px; border: 1.5px solid var(--forest); border-radius: 50%; display: grid; place-items: center; transition: transform .25s ease, background-color .2s; }
+.faq[open] .plus { transform: rotate(45deg); background: var(--forest); color: var(--paper); }
+.faq p { margin: 0 0 24px; padding: 0 4px; max-width: 62ch; }
+
+/* ---------- Final call to action ---------- */
+.cta {
+  border-top: 1.5px solid var(--forest); border-bottom: 1.5px solid var(--forest);
+  background-color: var(--lime);
+  background-image:
+    repeating-linear-gradient(90deg, rgba(32, 62, 50, .09) 0 1px, transparent 1px 80px),
+    repeating-linear-gradient(0deg, rgba(32, 62, 50, .09) 0 1px, transparent 1px 80px);
+}
+.cta .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 32px; padding-top: clamp(64px, 8vw, 112px); padding-bottom: clamp(64px, 8vw, 112px); }
+.cta .wrap > div { flex: 1 1 560px; min-width: 0; }
+.cta h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(44px, 7vw, 100px); line-height: .95; letter-spacing: -.035em; color: var(--forest); }
+.cta p { margin: 22px 0 0; font-size: clamp(21px, 2vw, 25px); color: var(--forest); }
+.btn-big { font-size: 21px; min-height: 60px; padding: 14px 30px; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--forest); color: var(--paper); }
+.foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px 48px; padding-top: 56px; padding-bottom: 40px; }
+.foot-top > div { flex: 1 1 360px; min-width: 0; max-width: 520px; }
+.foot-brand { margin: 0; display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 24px; }
+.foot-top p + p { margin: 16px 0 0; color: var(--soft-on-dark); font-size: 18px; }
+.foot-nav { display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: flex-start; }
+.foot-nav a { min-height: 44px; display: inline-flex; align-items: center; color: var(--lime); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-size: 17px; }
+.foot-nav a:hover { color: var(--paper); }
+.foot-legal { padding-top: 18px; padding-bottom: 28px; border-top: 1px solid rgba(244, 240, 228, .25); font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; line-height: 1.6; color: #c9d2c3; }
+
+@media (max-width: 820px) {
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  /* The stamp sits under the checklist instead of over it. */
+  .stamp { position: static; margin: -6px 18px 18px auto; width: 96px; height: 96px; font-size: 10px; }
+  .map text.city-label { font-size: 27px; }
+}
+@media (max-width: 480px) {
+  .nav { justify-content: center; }
+  .ticket dt { flex-basis: 92px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#book">Skip to the request form</a>
+
+<header class="site-header">
+  <p class="preview-bar" role="note"><strong>DESIGN PREVIEW</strong> · The forms on this page don't send anything yet. Nothing is submitted or booked.</p>
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="#top" aria-label="BookWorkGo, back to top">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="2" fill="#203e32"/><path d="M9 17h14M17 10l7 7-7 7" fill="none" stroke="#d6ed70" stroke-width="3" stroke-linecap="square"/></svg>
+      <span>BookWorkGo</span>
+    </a>
+    <div class="nav-links">
+      <a href="#service">The service</a>
+      <a href="#how">How it works</a>
+      <a href="#area">Area</a>
+      <a href="#faq">Questions</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href="#book">Book a service</a>
+      <a class="btn btn-ghost btn-sm" href="#pros">Get work</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap split">
+      <div class="hero-copy">
+        <p class="kicker rise d1">Vacant rental cleaning · South metro Denver pilot</p>
+        <h1 id="hero-title" class="rise d2">The job gets done.<br><em>Your day <span class="mark">moves on.</span></em></h1>
+        <p class="hero-lead rise d3">A simpler way to arrange vacant rental cleaning. You send the details. We coordinate the pro, the schedule, and the follow-through.</p>
+        <div class="hero-actions rise d4">
+          <a class="btn btn-primary" href="#book">Arrange a cleaning
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h11M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#pros">I'm a service pro</a>
+        </div>
+        <p class="promise rise d5">“Tell us what needs doing. We'll arrange the pro.”</p>
+      </div>
+
+      <div class="hero-art">
+        <figure class="ticket" aria-label="Example work order. Illustration only, not a real job.">
+          <div class="ticket-bar"><span>Example work order</span><span>Illustration only</span></div>
+          <div class="ticket-body">
+            <p class="ticket-ref">REF · BWG-EXAMPLE</p>
+            <p class="ticket-title">Vacant unit cleaning</p>
+            <dl>
+              <div><dt>UNIT</dt><dd>2 bed · 1 bath</dd></div>
+              <div><dt>CITY</dt><dd>Lone Tree</dd></div>
+              <div><dt>CONDITION</dt><dd>Routine turnover</dd></div>
+              <div><dt>PREFERRED</dt><dd>Thursday, morning</dd></div>
+              <div><dt>CONFIRMED</dt><dd>— not yet</dd></div>
+              <div><dt>PRICE</dt><dd>Agreed before work starts</dd></div>
+            </dl>
+            <ul class="checklist">
+              <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" fill="#203e32"/><path class="draw" pathLength="1" d="M5 10.5l3.2 3.2L15 6.8" fill="none" stroke="#d6ed70" stroke-width="2.4"/></svg>Details received</li>
+              <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" fill="none" stroke="#203e32" stroke-width="1.5"/></svg>Scope &amp; price agreed</li>
+              <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" fill="none" stroke="#203e32" stroke-width="1.5"/></svg>Pro arranged &amp; appointment set</li>
+              <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" fill="none" stroke="#203e32" stroke-width="1.5"/></svg>Completion photos &amp; follow-up</li>
+            </ul>
+          </div>
+          <div class="stamp" aria-hidden="true">NOT YET<br>SCHEDULED</div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service -->
+  <section id="service" class="section" aria-labelledby="service-title">
+    <div class="wrap split">
+      <div class="service-intro">
+        <p class="kicker">01 — The service</p>
+        <h2 id="service-title" class="h2">Vacant unit cleaning, <em>arranged for you.</em></h2>
+        <p>Our first service is ordinary cleaning of vacant rental units — between tenants, before a showing, or ahead of a move-in. It's for property managers and rental owners who need the unit ready and would rather not chase anyone to get there.</p>
+        <figure class="figure">
+          <svg viewBox="0 0 360 230" width="100%" role="img" aria-label="Illustration of an empty, freshly cleaned room with sunlight falling across the floor">
+            <rect width="360" height="230" fill="#ebe5d3"/>
+            <polygon points="60,40 300,40 300,160 60,160" fill="#f7f3e8" stroke="#203e32" stroke-width="1.5"/>
+            <polygon points="0,0 60,40 60,160 0,230" fill="#e3dcc6" stroke="#203e32" stroke-width="1.5"/>
+            <polygon points="360,0 300,40 300,160 360,230" fill="#e3dcc6" stroke="#203e32" stroke-width="1.5"/>
+            <polygon points="60,160 300,160 360,230 0,230" fill="#d9cfb3" stroke="#203e32" stroke-width="1.5"/>
+            <rect x="138" y="62" width="84" height="64" fill="#fffdf6" stroke="#203e32" stroke-width="1.5"/>
+            <line x1="180" y1="62" x2="180" y2="126" stroke="#203e32" stroke-width="1.5"/>
+            <line x1="138" y1="94" x2="222" y2="94" stroke="#203e32" stroke-width="1.5"/>
+            <polygon points="130,160 230,160 268,230 92,230" fill="#d6ed70" opacity=".75"/>
+            <line x1="60" y1="150" x2="300" y2="150" stroke="#203e32"/>
+            <rect x="248" y="176" width="26" height="30" fill="#e88744" stroke="#203e32" stroke-width="1.5"/>
+            <path d="M248 176 q13 -14 26 0" fill="none" stroke="#203e32" stroke-width="1.5"/>
+            <line x1="281" y1="206" x2="304" y2="118" stroke="#203e32" stroke-width="2"/>
+            <path d="M88 112l4 -10 4 10 -10 -4 12 0z" fill="#203e32"/>
+            <path d="M246 64l3 -8 3 8 -8 -3 10 0z" fill="#203e32"/>
+          </svg>
+          <figcaption class="figcap">Fig. 1 — Ready for the next tenant</figcaption>
+        </figure>
+      </div>
+
+      <div class="service-scope">
+        <h3 class="h3-label">A typical turnover clean covers</h3>
+        <p class="sub">Scope is confirmed for every unit before anything is arranged.</p>
+        <ol class="scope-list">
+          <li><span class="idx">A.01</span><div><strong>Kitchen</strong><p>Counters, sink, cabinet fronts and interiors, appliance exteriors. Inside the oven and refrigerator when agreed.</p></div></li>
+          <li><span class="idx">A.02</span><div><strong>Bathrooms</strong><p>Toilet, tub or shower, sink, mirror, and fixtures.</p></div></li>
+          <li><span class="idx">A.03</span><div><strong>Surfaces</strong><p>Dusting sills, baseboards, ledges, doors, and switch plates.</p></div></li>
+          <li><span class="idx">A.04</span><div><strong>Floors</strong><p>Vacuuming and mopping throughout.</p></div></li>
+          <li><span class="idx">A.05</span><div><strong>Left-behind trash</strong><p>Small items bagged and removed. Furniture or bulk items need a conversation first.</p></div></li>
+        </ol>
+        <div class="callout">
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="flex:none;margin-top:3px"><circle cx="11" cy="11" r="9.5" fill="none" stroke="#203e32" stroke-width="1.5"/><path d="M11 6v6M11 15v1.5" stroke="#203e32" stroke-width="2"/></svg>
+          <p>Need more than an ordinary clean — repairs, painting, hazardous cleanup? Mention it in your request. We'll tell you plainly whether it fits the pilot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="how" class="section process" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="process-head">
+        <div>
+          <p class="kicker">02 — How it works</p>
+          <h2 id="how-title" class="h2">Three steps. <em>None of them are chasing.</em></h2>
+        </div>
+        <p>Behind the scenes, software — including AI — helps us sort requests and line up schedules. People confirm every detail with you.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="step-num n1" aria-hidden="true">1</span>
+          <h3>Tell us what needs doing.</h3>
+          <p>Send the unit size, city, condition, and when you'd like it done. A short form — no phone tag.</p>
+        </li>
+        <li>
+          <span class="step-num n2" aria-hidden="true">2</span>
+          <h3>Agree on scope, price, and availability.</h3>
+          <p>We come back with what we can arrange: what's included, the price, and an appointment. Nothing is scheduled until you confirm.</p>
+        </li>
+        <li>
+          <span class="step-num n3" aria-hidden="true">3</span>
+          <h3>Get it done, with proof.</h3>
+          <p>The pro completes the work. For pilot jobs, we plan to share completion photos and follow up with you afterward.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Customer request -->
+  <section id="book" class="section" aria-labelledby="book-title">
+    <div class="wrap split">
+      <div class="form-intro">
+        <p class="kicker">03 — Book a service</p>
+        <h2 id="book-title" class="h2">Arrange a cleaning.</h2>
+        <p>Tell us about the unit. We'll confirm scope, price, and an appointment with you individually before anything is scheduled.</p>
+        <div class="notice" role="note">
+          <p class="mono">DESIGN PREVIEW</p>
+          <p>This form doesn't send anything yet. You can review your details and download them as a draft file on your device. Nothing is submitted or booked.</p>
+        </div>
+        <p class="fine">Please don't include door codes, lockbox codes, payment details, or documents. Access is arranged directly once a job is confirmed.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-bar"><span>Service request · Draft</span><span>Required fields are marked</span></div>
+
+        <form id="request-form" aria-labelledby="book-title" autocomplete="on">
+          <noscript><p class="noscript">Turn on JavaScript to review your details and download a draft. Either way, this preview doesn't send anything.</p></noscript>
+          <fieldset class="group">
+            <legend>About you</legend>
+            <div class="fgrid">
+              <div>
+                <label class="lbl" for="b-name">Name <span class="req">(required)</span></label>
+                <input class="ctl" id="b-name" name="name" type="text" autocomplete="name" required maxlength="120">
+              </div>
+              <div>
+                <label class="lbl" for="b-company">Company or property name <span class="opt">(optional)</span></label>
+                <input class="ctl" id="b-company" name="company" type="text" autocomplete="organization" maxlength="160">
+              </div>
+              <div>
+                <label class="lbl" for="b-email">Email <span class="req">(required)</span></label>
+                <input class="ctl" id="b-email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="b-email-hint">
+                <p class="hint" id="b-email-hint">For example, name@company.com</p>
+              </div>
+              <div>
+                <label class="lbl" for="b-phone">Phone <span class="opt">(optional)</span></label>
+                <input class="ctl" id="b-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" pattern="[0-9()+.\- ]{7,30}" aria-describedby="b-phone-hint">
+                <p class="hint" id="b-phone-hint">If you'd rather we call.</p>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="group">
+            <legend>The unit</legend>
+            <div class="fgrid">
+              <div>
+                <label class="lbl" for="b-city">City <span class="req">(required)</span></label>
+                <select class="ctl" id="b-city" name="city" required>
+                  <option value="">Choose a city</option>
+                  <option>Centennial</option>
+                  <option>Greenwood Village</option>
+                  <option>Lone Tree</option>
+                  <option>Parker</option>
+                  <option>Somewhere else nearby</option>
+                </select>
+              </div>
+              <div>
+                <label class="lbl" for="b-zip">ZIP code <span class="req">(required)</span></label>
+                <input class="ctl" id="b-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" required pattern="[0-9]{5}" maxlength="5" aria-describedby="b-zip-hint">
+                <p class="hint" id="b-zip-hint">Five digits.</p>
+              </div>
+              <div>
+                <label class="lbl" for="b-size">Unit size <span class="req">(required)</span></label>
+                <select class="ctl" id="b-size" name="unit_size" required>
+                  <option value="">Choose a size</option>
+                  <option>Studio</option>
+                  <option>1 bedroom</option>
+                  <option>2 bedrooms</option>
+                  <option>3 bedrooms</option>
+                  <option>4 or more bedrooms</option>
+                </select>
+              </div>
+              <div>
+                <label class="lbl" for="b-date">Preferred service date <span class="req">(required)</span></label>
+                <input class="ctl" id="b-date" name="preferred_date" type="date" required aria-describedby="b-date-hint">
+                <p class="hint" id="b-date-hint"><strong>A preference, not an appointment.</strong> We'll confirm a date with you before anything is scheduled.</p>
+              </div>
+              <fieldset class="span" aria-describedby="b-cond-hint">
+                <legend>Current unit condition <span class="req">(required)</span></legend>
+                <p class="hint" id="b-cond-hint" style="margin:0 0 12px">Your best guess is fine. It helps us scope the job.</p>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="condition" value="Routine turnover" required><span>Routine turnover<small>Lightly lived-in, normal wear</small></span></label>
+                  <label class="choice"><input type="radio" name="condition" value="Needs extra attention"><span>Needs extra attention<small>Buildup in kitchen or baths</small></span></label>
+                  <label class="choice"><input type="radio" name="condition" value="Heavy"><span>Heavy<small>Significant grime or debris left</small></span></label>
+                  <label class="choice"><input type="radio" name="condition" value="Not sure"><span>Not sure<small>We'll ask a few questions</small></span></label>
+                </div>
+              </fieldset>
+              <div class="span">
+                <label class="lbl" for="b-notes">Notes <span class="opt">(optional)</span></label>
+                <textarea class="ctl" id="b-notes" name="notes" maxlength="1500" aria-describedby="b-notes-hint"></textarea>
+                <p class="hint" id="b-notes-hint">Bathrooms, appliances, timing limits, anything unusual. Please no door codes or payment details.</p>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="form-foot">
+            <button class="btn btn-primary" type="submit" disabled>Review request
+              <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h11M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+            </button>
+            <p>Nothing is sent when you press this. You'll see a summary first.</p>
+          </div>
+        </form>
+
+        <div id="request-review" class="review" hidden>
+          <h3 tabindex="-1">Review your request</h3>
+          <p class="tags"><span>Not submitted</span><span>Not booked</span></p>
+          <p>This summary exists only on this page. BookWorkGo has not received it. Your preferred date is not a confirmed appointment.</p>
+          <dl data-review-list></dl>
+          <div class="review-actions">
+            <button class="btn btn-ghost" type="button" data-action="edit">Edit details</button>
+            <button class="btn btn-primary" type="button" data-action="download">Download draft file</button>
+            <button class="btn btn-text" type="button" data-action="reset">Start over</button>
+          </div>
+          <p class="status" data-status aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service area -->
+  <section id="area" class="section area" aria-labelledby="area-title">
+    <div class="wrap split">
+      <div class="area-copy">
+        <p class="kicker">04 — Service area</p>
+        <h2 id="area-title" class="h2">Where we're <em>starting.</em></h2>
+        <p>This is an early pilot in four south metro Denver communities. Availability is confirmed request by request.</p>
+        <ul class="area-list">
+          <li><span class="idx">01</span><span class="city">Centennial</span></li>
+          <li><span class="idx">02</span><span class="city">Greenwood Village</span></li>
+          <li><span class="idx">03</span><span class="city">Lone Tree</span></li>
+          <li><span class="idx">04</span><span class="city">Parker</span></li>
+        </ul>
+        <p class="after">Close by but outside these four? Send the request and choose “Somewhere else nearby.” We'll tell you honestly whether we can arrange it.</p>
+      </div>
+      <figure class="map">
+        <svg viewBox="0 0 520 420" width="100%" role="img" aria-label="Schematic map, not to scale, showing the four pilot communities: Greenwood Village to the north, Centennial to its east, Lone Tree to the southwest, and Parker to the southeast.">
+          <rect x="1" y="1" width="518" height="418" fill="#fffdf6" stroke="#203e32" stroke-width="1.5"/>
+          <g stroke="rgba(32,62,50,.12)">
+            <line x1="0" y1="70" x2="520" y2="70"/><line x1="0" y1="140" x2="520" y2="140"/><line x1="0" y1="210" x2="520" y2="210"/><line x1="0" y1="280" x2="520" y2="280"/><line x1="0" y1="350" x2="520" y2="350"/>
+            <line x1="87" y1="0" x2="87" y2="420"/><line x1="174" y1="0" x2="174" y2="420"/><line x1="261" y1="0" x2="261" y2="420"/><line x1="348" y1="0" x2="348" y2="420"/><line x1="435" y1="0" x2="435" y2="420"/>
+          </g>
+          <path d="M70 70 L300 52 L470 210 L452 352 L250 384 L96 316 Z" fill="#d6ed70" fill-opacity=".38" stroke="#203e32" stroke-width="1.5" stroke-dasharray="7 6"/>
+          <g fill="#203e32"><circle cx="160" cy="112" r="9"/><circle cx="296" cy="146" r="9"/><circle cx="176" cy="268" r="9"/><circle cx="392" cy="298" r="9"/></g>
+          <g fill="none" stroke="#203e32" stroke-width="1.5"><circle cx="160" cy="112" r="17"/><circle cx="296" cy="146" r="17"/><circle cx="176" cy="268" r="17"/><circle cx="392" cy="298" r="17"/></g>
+          <g font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-weight="700" font-size="21" fill="#203e32">
+            <text class="city-label" x="186" y="106">Greenwood Village</text>
+            <text class="city-label" x="322" y="140">Centennial</text>
+            <text class="city-label" x="202" y="262">Lone Tree</text>
+            <text class="city-label" x="414" y="292">Parker</text>
+          </g>
+          <g font-family="'DM Mono', ui-monospace, monospace" font-size="12" fill="#46534a" letter-spacing="1">
+            <text x="20" y="400">SCHEMATIC · NOT TO SCALE</text>
+            <text x="452" y="34">N ↑</text>
+          </g>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Providers -->
+  <section id="pros" class="section pros dark" aria-labelledby="pros-title">
+    <div class="wrap">
+      <p class="kicker">05 — For service pros</p>
+      <h2 id="pros-title">Clear jobs. Good work. <em>Your choice.</em></h2>
+      <p class="pros-lead">Independent cleaners and small crews: here's how we intend to work with pros during the pilot.</p>
+
+      <div class="pillars">
+        <div><h3>Clear jobs</h3><p>Unit details, scope, appointment, and payout are agreed before you say yes.</p></div>
+        <div><h3>Good work</h3><p>Show up, do the job well, and document completion. We handle the back-and-forth with the customer.</p></div>
+        <div><h3>Your choice</h3><p>You decide which jobs to take. There's no obligation to accept any job we offer.</p></div>
+      </div>
+
+      <div class="split">
+        <div class="form-intro">
+          <h3>Tell us about your business.</h3>
+          <p>Before we arrange any work, we review each provider's experience, insurance, coverage area, rates, and capacity.</p>
+          <p class="no-guarantee">Applying doesn't guarantee approval, jobs, income, or a payout schedule.</p>
+          <p class="preview-note">DESIGN PREVIEW · This form doesn't send anything yet. Nothing is submitted or reviewed.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-bar lime"><span>Provider interest · Draft</span><span>Review required before any work</span></div>
+
+          <form id="provider-form" aria-labelledby="pros-title" autocomplete="on">
+            <noscript><p class="noscript">Turn on JavaScript to review your details and download a draft. Either way, this preview doesn't send anything.</p></noscript>
+            <div class="fgrid">
+              <div>
+                <label class="lbl" for="p-name">Contact name <span class="req">(required)</span></label>
+                <input class="ctl" id="p-name" name="contact_name" type="text" autocomplete="name" required maxlength="120">
+              </div>
+              <div>
+                <label class="lbl" for="p-biz">Business name <span class="req">(required)</span></label>
+                <input class="ctl" id="p-biz" name="business_name" type="text" autocomplete="organization" required maxlength="160" aria-describedby="p-biz-hint">
+                <p class="hint" id="p-biz-hint">Your own name is fine if you work solo.</p>
+              </div>
+              <div>
+                <label class="lbl" for="p-email">Email <span class="req">(required)</span></label>
+                <input class="ctl" id="p-email" name="email" type="email" autocomplete="email" required maxlength="200">
+              </div>
+              <div>
+                <label class="lbl" for="p-phone">Phone <span class="req">(required)</span></label>
+                <input class="ctl" id="p-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30" pattern="[0-9()+.\- ]{7,30}">
+              </div>
+
+              <fieldset class="span" aria-describedby="p-area-hint">
+                <legend>Service area <span class="req">(choose at least one)</span></legend>
+                <p class="hint" id="p-area-hint" style="margin:0 0 12px">Where you can reliably take jobs.</p>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="service_area" value="Centennial"><span>Centennial</span></label>
+                  <label class="choice"><input type="checkbox" name="service_area" value="Greenwood Village"><span>Greenwood Village</span></label>
+                  <label class="choice"><input type="checkbox" name="service_area" value="Lone Tree"><span>Lone Tree</span></label>
+                  <label class="choice"><input type="checkbox" name="service_area" value="Parker"><span>Parker</span></label>
+                  <label class="choice"><input type="checkbox" name="service_area" value="Elsewhere nearby"><span>Elsewhere nearby</span></label>
+                </div>
+              </fieldset>
+
+              <div>
+                <label class="lbl" for="p-crews">Available crews <span class="req">(required)</span></label>
+                <select class="ctl" id="p-crews" name="crews" required>
+                  <option value="">Choose one</option>
+                  <option>Just me</option>
+                  <option>1 crew</option>
+                  <option>2 crews</option>
+                  <option>3 or more crews</option>
+                </select>
+              </div>
+
+              <fieldset>
+                <legend>General liability insurance <span class="req">(required)</span></legend>
+                <div class="choices stack">
+                  <label class="choice"><input type="radio" name="insurance" value="Yes, active policy" required><span>Yes, active policy</span></label>
+                  <label class="choice"><input type="radio" name="insurance" value="In progress"><span>In progress</span></label>
+                  <label class="choice"><input type="radio" name="insurance" value="No"><span>No</span></label>
+                </div>
+              </fieldset>
+
+              <div class="span">
+                <label class="lbl" for="p-exp">Experience, rates, and availability <span class="req">(required)</span></label>
+                <textarea class="ctl" id="p-exp" name="experience" required maxlength="2000" aria-describedby="p-exp-hint"></textarea>
+                <p class="hint" id="p-exp-hint">Years cleaning, property types, your usual rate for a vacant unit, and the days or times you're typically free.</p>
+              </div>
+            </div>
+
+            <div class="form-foot">
+              <button class="btn btn-primary" type="submit" disabled>Review application
+                <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h11M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+              </button>
+              <p>Nothing is sent when you press this.</p>
+            </div>
+          </form>
+
+          <div id="provider-review" class="review" hidden>
+            <h3 tabindex="-1">Review your application</h3>
+            <p class="tags"><span>Not submitted</span><span>Not reviewed</span></p>
+            <p>This summary exists only on this page. BookWorkGo has not received it, and it isn't an approval or an offer of work.</p>
+            <dl data-review-list></dl>
+            <div class="review-actions">
+              <button class="btn btn-ghost" type="button" data-action="edit">Edit details</button>
+              <button class="btn btn-primary" type="button" data-action="download">Download draft file</button>
+              <button class="btn btn-text" type="button" data-action="reset">Start over</button>
+            </div>
+            <p class="status" data-status aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Questions -->
+  <section id="faq" class="section" aria-labelledby="faq-title">
+    <div class="wrap split">
+      <div class="faq-intro">
+        <p class="kicker">06 — Questions</p>
+        <h2 id="faq-title" class="h2">Fair <em>questions.</em></h2>
+        <p>Plain answers about an early pilot. If yours isn't here, put it in the notes of your request.</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>Is BookWorkGo a cleaning company?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2"/></svg></span></summary>
+          <p>No. We coordinate the job: we take your request, agree on the details with you, and arrange an independent local pro to do the work. Software, including AI, helps us sort requests and schedules; people confirm every detail.</p>
+        </details>
+        <details class="faq">
+          <summary>How much does a cleaning cost?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2"/></svg></span></summary>
+          <p>It depends on unit size, condition, and scope. During the pilot there's no published price list — we agree on a price with you before any work is arranged.</p>
+        </details>
+        <details class="faq">
+          <summary>When can the cleaning happen?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2"/></svg></span></summary>
+          <p>Your preferred date is a starting point, not an appointment. We check availability for each request, and nothing is scheduled until you confirm a specific date and time.</p>
+        </details>
+        <details class="faq">
+          <summary>How will I know the work was done?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2"/></svg></span></summary>
+          <p>For pilot jobs, we plan to share completion photos after the visit and follow up with you to make sure the unit is where you need it.</p>
+        </details>
+        <details class="faq">
+          <summary>How do keys and access work?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2"/></svg></span></summary>
+          <p>Access is arranged directly with you once a job is confirmed. Please don't put door codes or lockbox codes in the request form.</p>
+        </details>
+        <details class="faq">
+          <summary>I'm a cleaning pro. What happens if I apply?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2"/></svg></span></summary>
+          <p>We review your experience, insurance, coverage area, rates, and capacity before arranging any work. Applying doesn't guarantee approval, jobs, or income, and you're never obligated to accept a job.</p>
+        </details>
+        <details class="faq">
+          <summary>Has my request been sent?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2"/></svg></span></summary>
+          <p>Not yet. This page is a design preview: the forms show a summary and let you download a draft file to your own device, but nothing is transmitted to BookWorkGo.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final call to action -->
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div>
+        <h2 id="cta-title">Have a unit <em>to turn?</em></h2>
+        <p>Tell us what needs doing. We'll arrange the pro.</p>
+      </div>
+      <a class="btn btn-primary btn-big" href="#book">Arrange a cleaning
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h11M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer dark">
+  <div class="wrap foot-top">
+    <div>
+      <p class="foot-brand">
+        <svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="2" fill="#d6ed70"/><path d="M9 17h14M17 10l7 7-7 7" fill="none" stroke="#203e32" stroke-width="3" stroke-linecap="square"/></svg>
+        BookWorkGo
+      </p>
+      <p>Coordinated service jobs, starting with vacant rental cleaning in Centennial, Greenwood Village, Lone Tree, and Parker.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="#book">Book a service</a>
+      <a href="#pros">Get work</a>
+      <a href="#faq">Questions</a>
+    </nav>
+  </div>
+  <p class="wrap foot-legal">© 2026 BookWorkGo · Early pilot · Terms and privacy policy are being prepared and are not yet published.</p>
+</footer>
+
+<script src="js/draft-form.js" defer></script>
+<script src="js/request-form.js" defer></script>
+<script src="js/provider-form.js" defer></script>
+</body>
+</html>
+
