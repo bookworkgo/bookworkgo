@@ -28,7 +28,8 @@
       { name: 'service_area', label: 'Service area', multiple: true },
       { name: 'crews', label: 'Available crews' },
       { name: 'insurance', label: 'General liability insurance' },
-      { name: 'experience', label: 'Experience, rates, availability' }
+      { name: 'experience', label: 'Experience, rates, availability' },
+      { name: 'sms_consent', label: 'Text messages', format: function () { return 'Yes, agreed to receive texts about jobs and the application'; }, fallback: 'No' }
     ]
   });
 })();

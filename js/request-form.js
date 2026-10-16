@@ -25,6 +25,12 @@
       if (date.value && date.value < NS.todayISO()) {
         date.setCustomValidity('Choose today or a later date. This is a preference, not an appointment.');
       }
+      // Texts need a number to go to.
+      var phone = form.elements.namedItem('phone');
+      var sms = form.elements.namedItem('sms_consent');
+      if (sms && sms.checked && !phone.value.trim()) {
+        phone.setCustomValidity('Add a phone number to receive text messages, or uncheck the text message box.');
+      }
     },
 
     fields: [
@@ -37,7 +43,8 @@
       { name: 'unit_size', label: 'Unit size' },
       { name: 'preferred_date', label: 'Preferred date (not an appointment)', format: NS.formatDate },
       { name: 'condition', label: 'Unit condition' },
-      { name: 'notes', label: 'Notes', fallback: 'None' }
+      { name: 'notes', label: 'Notes', fallback: 'None' },
+      { name: 'sms_consent', label: 'Text messages', format: function () { return 'Yes, agreed to receive texts about this request'; }, fallback: 'No' }
     ]
   });
 })();
