@@ -385,8 +385,6 @@ select.ctl {
 .consent .consent-text { display: block; margin-top: 6px; font-size: 16px; line-height: 1.45; color: #2f3b33; }
 .consent .consent-text a { color: var(--forest); font-weight: 600; }
 
-.todo-contact { background: #fff0c2; padding: 0 4px; border-bottom: 1.5px dashed var(--clay-ink); font-family: var(--mono); font-size: .85em; white-space: nowrap; }
-.dark .todo-contact { color: var(--ink); }
 
 /* Inner page header band */
 .page-head {

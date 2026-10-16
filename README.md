@@ -32,7 +32,7 @@ CNAME                   custom domain (keep)
 
 ## Before launch
 
-- **Support contact.** Search for `[support email]` (five spots across the three new pages) and replace it with the real support email address.
+- **Support contact.** The support email, BookWorkGoGo@gmail.com, appears on the opt-in page, Terms of Service, and Privacy Policy. Update all three together if it changes.
 - **Forms are preview-only.** No form sends anything yet: each one validates in the browser, shows a review summary, and offers a draft file download. The "Design preview" notices say so. Connect a real, verified submission destination in `js/draft-form.js` (see the comment in the submit handler), then update the preview wording. Never put private keys in browser code.
 - **Text messaging registration.** Messaging providers review the opt-in page and the consent wording. A form that says it doesn't send anything may be questioned, so connect submissions before registering if possible.
 - **Legal review.** The Terms of Service and Privacy Policy were drafted for an early pilot and should be reviewed by a lawyer.
