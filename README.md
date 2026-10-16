@@ -21,7 +21,7 @@ opt-in/index.html
 terms-of-service/index.html
 privacy-policy/index.html
 css/site.css            shared styles for every page
-js/draft-form.js        shared form behavior: validate, review summary, draft download
+js/draft-form.js        shared form behavior: validate, review summary, send by email, copy
 js/request-form.js      customer request form
 js/provider-form.js     provider form
 js/optin-form.js        text message opt-in form
@@ -33,8 +33,8 @@ CNAME                   custom domain (keep)
 ## Before launch
 
 - **Support contact.** The support email, BookWorkGoGo@gmail.com, appears on the opt-in page, Terms of Service, and Privacy Policy. Update all three together if it changes.
-- **Forms are preview-only.** No form sends anything yet: each one validates in the browser, shows a review summary, and offers a draft file download. The "Design preview" notices say so. Connect a real, verified submission destination in `js/draft-form.js` (see the comment in the submit handler), then update the preview wording. Never put private keys in browser code.
-- **Text messaging registration.** Messaging providers review the opt-in page and the consent wording. A form that says it doesn't send anything may be questioned, so connect submissions before registering if possible.
+- **How the forms send.** The site transmits nothing itself. Each form validates in the browser and shows a review summary; **Send by email** then opens the visitor's own email app with a message to BookWorkGoGo@gmail.com already filled in, and **Copy details** is the fallback. Contact details (email and (888) 686-0144) are in `js/draft-form.js` (`NS.contact`) and in each page's top bar, footer, and legal text. To accept submissions directly later, replace the email step in `js/draft-form.js`. Never put private keys in browser code.
+- **Text messaging registration.** Messaging providers review the opt-in page and the consent wording. Opt-ins arrive as emails containing the consent text, which doubles as a record of consent.
 - **Legal review.** The Terms of Service and Privacy Policy were drafted for an early pilot and should be reviewed by a lawyer.
 
 ## Preview locally
@@ -53,7 +53,7 @@ Then open http://localhost:8000.
 | `landing-mobile.png`, `landing-mobile-full.png` | Landing page on a phone |
 | `opt-in-desktop.png`, `opt-in-desktop-full.png`, `opt-in-mobile.png`, `opt-in-mobile-full.png` | Text message opt-in page |
 | `opt-in-form-filled.png` | Opt-in form completed, consent box checked |
-| `opt-in-review.png` | Review summary after the opt-in form |
+| `opt-in-review.png` | Review summary with Send by email and Copy details |
 | `request-form-text-consent.png` | Optional text consent box on the customer request form |
 | `provider-form-text-consent.png` | Optional text consent box on the provider form |
 | `terms-of-service-desktop.png`, `terms-of-service-mobile.png` | Terms of Service |

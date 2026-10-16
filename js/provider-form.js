@@ -1,4 +1,4 @@
-/* BookWorkGo — provider interest form (preview: nothing is sent or reviewed). */
+/* BookWorkGo — provider interest form (sent by the visitor's own email app). */
 (function () {
   'use strict';
 
@@ -8,9 +8,11 @@
   NS.setupDraftForm({
     formId: 'provider-form',
     reviewId: 'provider-review',
-    fileStem: 'bookworkgo-provider-draft',
-    draftOf: 'BookWorkGo provider interest',
-    status: 'Draft only. Not submitted to BookWorkGo. Not reviewed or approved, and not an offer of work.',
+    subject: function (rows) {
+      var biz = (rows.filter(function (r) { return r.name === 'business_name'; })[0] || {}).value;
+      return 'Service pro application: ' + biz;
+    },
+    intro: 'New service pro application. Applying does not guarantee approval or jobs.',
 
     checks: function (form) {
       NS.patternMessages(form, { phone: 'Use digits, spaces, dashes, dots, or parentheses.' });

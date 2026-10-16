@@ -1,4 +1,4 @@
-/* BookWorkGo — text message opt-in form (preview: nothing is sent, nobody is signed up). */
+/* BookWorkGo — text message opt-in form (sent by the visitor's own email app). */
 (function () {
   'use strict';
 
@@ -8,9 +8,8 @@
   NS.setupDraftForm({
     formId: 'optin-form',
     reviewId: 'optin-review',
-    fileStem: 'bookworkgo-text-optin-draft',
-    draftOf: 'BookWorkGo text message opt-in',
-    status: 'Draft only. Not submitted to BookWorkGo. Not signed up; no texts will be sent.',
+    subject: 'Text message opt-in',
+    intro: 'Please sign me up for BookWorkGo job updates by text. I agreed to the text message terms on bookworkgo.com/opt-in: message frequency varies, message and data rates may apply, reply STOP to opt out or HELP for help.',
 
     checks: function (form) {
       var phoneMsg = 'Enter a mobile number with at least 10 digits, for example (303) 555-0100.';

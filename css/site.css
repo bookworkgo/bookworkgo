@@ -459,3 +459,17 @@ select.ctl {
 @media (min-width: 900px) {
   .toc { position: sticky; top: calc(var(--header-h) + 24px); }
 }
+
+/* Contact details (top bar, hero, footer, dark panels) */
+.contact-bar { font-size: 14px; }
+.contact-bar a, .notice a, .pros .preview-note a, .foot-contact a { color: var(--lime); text-underline-offset: 3px; }
+.contact-bar a:hover, .notice a:hover, .pros .preview-note a:hover, .foot-contact a:hover { color: var(--paper); }
+.contact-bar a { display: inline-block; padding: 4px 2px; }
+.hero-contact { margin: 18px 0 0; font-size: 20px; color: #24312a; }
+.hero-contact a { font-weight: 700; text-underline-offset: 4px; }
+.foot-top .foot-contact { margin-top: 18px; font-family: var(--mono); font-size: 15px; line-height: 1.9; }
+.foot-contact a { color: var(--lime); }
+.review-actions a.btn:not([href]) { opacity: .5; pointer-events: none; }
+
+/* Keep phone numbers on one line. */
+a[href^="tel:"] { white-space: nowrap; }

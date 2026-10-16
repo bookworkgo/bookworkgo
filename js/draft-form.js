@@ -1,19 +1,27 @@
 /*
- * BookWorkGo — shared "review and download a draft" form behavior.
+ * BookWorkGo — shared form behavior: validate, review, then send by email.
  *
- * Preview mode: nothing on this page is transmitted anywhere. A form is
- * validated in the browser, shown back as a review summary, and can be
- * downloaded as a draft file to the visitor's own device. Personal details
- * live only in page memory and are cleared on "Start over" or page reload.
+ * The website itself transmits nothing. After a visitor reviews their
+ * details, "Send by email" opens their own email app with a message to
+ * BookWorkGo already filled in; it is sent only when they press Send there.
+ * "Copy details" is the fallback for visitors without an email app.
+ * Personal details live only in page memory and are cleared on
+ * "Start over" or page reload.
  *
- * When a real, verified submission destination exists, the place to add it
- * is the "submit" step in setupDraftForm (see the note there). Never place
- * private keys in this file: anything here is public.
+ * To switch to direct submissions later (for example a small API), replace
+ * the email step in setupDraftForm. Never place private keys in this file:
+ * anything here is public.
  */
 (function () {
   'use strict';
 
   var NS = (window.BookWorkGo = window.BookWorkGo || {});
+
+  NS.contact = {
+    email: 'BookWorkGoGo@gmail.com',
+    phone: '(888) 686-0144',
+    phoneE164: '+18886860144'
+  };
 
   /** Today's date in the visitor's time zone, as YYYY-MM-DD. */
   NS.todayISO = function () {
@@ -45,8 +53,8 @@
    *   formId, reviewId   element ids
    *   fields             [{ name, label, multiple?, format?(raw), fallback? }]
    *   checks(form)       optional: sets custom validity messages before validation
-   *   draftOf, status    text written into the downloaded draft
-   *   fileStem           download file name prefix
+   *   subject(rows)      email subject line
+   *   intro              first line of the email body
    */
   NS.setupDraftForm = function (options) {
     var form = document.getElementById(options.formId);
@@ -55,6 +63,7 @@
 
     var list = review.querySelector('[data-review-list]');
     var statusEl = review.querySelector('[data-status]');
+    var emailLink = review.querySelector('[data-email-link]');
     var heading = review.querySelector('h3, h4');
     var rows = [];
 
@@ -73,6 +82,22 @@
       });
     }
 
+    function asText() {
+      var lines = [options.intro, ''];
+      rows.forEach(function (row) {
+        lines.push(row.label + ': ' + row.value.replace(/\r?\n/g, '\n  '));
+      });
+      lines.push('', 'Sent from the form at ' + location.origin + location.pathname);
+      return lines.join('\n');
+    }
+
+    function mailtoHref() {
+      var subject = typeof options.subject === 'function' ? options.subject(rows) : options.subject;
+      return 'mailto:' + NS.contact.email +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(asText());
+    }
+
     // Text only: user input is never parsed as markup.
     function render() {
       var frag = document.createDocumentFragment();
@@ -87,6 +112,7 @@
         frag.appendChild(wrap);
       });
       list.replaceChildren(frag);
+      if (emailLink) emailLink.href = mailtoHref();
     }
 
     function showForm() {
@@ -104,27 +130,29 @@
       if (heading) heading.focus();
     }
 
-    function download() {
-      var payload = {
-        draftOf: options.draftOf,
-        status: options.status,
-        preparedAt: new Date().toISOString(),
-        fields: rows
-      };
-      try {
-        var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-        var url = URL.createObjectURL(blob);
-        var link = document.createElement('a');
-        link.href = url;
-        link.download = options.fileStem + '-' + NS.todayISO() + '.json';
-        link.hidden = true;
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
-        statusEl.textContent = 'Draft file saved to this device. It has not been sent anywhere.';
-      } catch (err) {
-        statusEl.textContent = 'This browser could not create the download. Your details are shown above and have not been sent anywhere.';
+    function copyDetails() {
+      var text = asText();
+      function done() {
+        statusEl.textContent = 'Copied. Paste it into an email to ' + NS.contact.email + ', or text the details to ' + NS.contact.phone + '.';
+      }
+      function fallback() {
+        var area = document.createElement('textarea');
+        area.value = text;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.opacity = '0';
+        document.body.appendChild(area);
+        area.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        area.remove();
+        if (ok) done();
+        else statusEl.textContent = 'This browser blocked copying. Please email the details above to ' + NS.contact.email + '.';
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else {
+        fallback();
       }
     }
 
@@ -139,24 +167,28 @@
         return;
       }
       rows = collect();
-      // Future integration point: once a verified destination exists, send
-      // `rows` here and only then change the preview wording on the page.
       render();
       showReview();
     });
 
     review.addEventListener('click', function (event) {
-      var button = event.target.closest('[data-action]');
-      if (!button) return;
-      var action = button.getAttribute('data-action');
+      var target = event.target.closest('[data-action], [data-email-link]');
+      if (!target) return;
+      if (target.hasAttribute('data-email-link')) {
+        // The link opens the visitor's email app; nothing is sent from this page.
+        statusEl.textContent = 'Your email app should open with everything filled in. Press Send there to reach us. Nothing opened? Use Copy details instead.';
+        return;
+      }
+      var action = target.getAttribute('data-action');
       if (action === 'edit') {
         showForm();
-      } else if (action === 'download') {
-        download();
+      } else if (action === 'copy') {
+        copyDetails();
       } else if (action === 'reset') {
         form.reset();
         rows = [];
         list.replaceChildren();
+        if (emailLink) emailLink.removeAttribute('href');
         runChecks();
         showForm();
       }

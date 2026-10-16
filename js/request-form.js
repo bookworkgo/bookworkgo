@@ -1,4 +1,4 @@
-/* BookWorkGo — customer service request form (preview: nothing is sent). */
+/* BookWorkGo — customer service request form (sent by the visitor's own email app). */
 (function () {
   'use strict';
 
@@ -11,9 +11,11 @@
   NS.setupDraftForm({
     formId: 'request-form',
     reviewId: 'request-review',
-    fileStem: 'bookworkgo-request-draft',
-    draftOf: 'BookWorkGo service request',
-    status: 'Draft only. Not submitted to BookWorkGo. Nothing has been booked. The preferred date is not a confirmed appointment.',
+    subject: function (rows) {
+      var get = function (n) { return (rows.filter(function (r) { return r.name === n; })[0] || {}).value; };
+      return 'Cleaning request: ' + get('unit_size') + ', ' + get('city');
+    },
+    intro: 'New vacant unit cleaning request. The preferred date is a preference, not a confirmed appointment.',
 
     checks: function (form) {
       NS.patternMessages(form, {
