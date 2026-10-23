@@ -56,5 +56,7 @@ Then open http://localhost:8000.
 | `opt-in-review.png` | Review summary with Send by email and Copy details |
 | `request-form-text-consent.png` | Optional text consent box on the customer request form |
 | `provider-form-text-consent.png` | Optional text consent box on the provider form |
+| `sms-optin-service.png` | Full customer service request form with the text consent box (for the toll-free verification opt-in proof) |
+| `sms-optin-provider.png` | Full provider form with the text consent box (for the toll-free verification opt-in proof) |
 | `terms-of-service-desktop.png`, `terms-of-service-mobile.png` | Terms of Service |
 | `privacy-policy-desktop.png`, `privacy-policy-mobile.png` | Privacy Policy |
